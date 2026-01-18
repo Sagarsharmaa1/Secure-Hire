@@ -10,6 +10,10 @@ app.get("/books" ,(req , res)=>{
     res.status(200).json({msg: "this is books  from api"})
 })
 
+app.get("/test" ,(req , res)=>{
+    res.status(200).json({msg: "this is test  from api"})
+})
+
 app.get("/health" ,(req , res)=>{
     res.status(200).json({msg: "this is health details from api"})
 })
