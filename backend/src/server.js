@@ -2,6 +2,8 @@ import express from "express"
 import path from "path"
 
 import { ENV } from "./lib/env.js";
+import { connect } from "http2";
+import { connectDB } from "./lib/db.js";
 const app = express();
 
 const __dirname = path.resolve()
@@ -26,7 +28,20 @@ if(ENV.NODE_ENV === "production"){
         res.sendFile(path.join(__dirname,"../frontend/dist"))
     })
 }
-app.listen(ENV.PORT,()=>{
+
+//server starting 
+
+const startServer = async()=>{
+try {
+    await connectDB();
+    app.listen(ENV.PORT,()=>{
     console.log(`server is running on port ${ENV.PORT}`);
     
 })
+    
+} catch (error) {
+    console.log("Error starting the server" , error);
+    
+}
+}
+startServer();
