@@ -13,7 +13,7 @@ function App() {
      <SignedOut>
          <SignInButton mode='modal'> 
             <button className='sign-Up'>
-              Sign up please
+              Sign up
             </button>
          </SignInButton>
      </SignedOut>
