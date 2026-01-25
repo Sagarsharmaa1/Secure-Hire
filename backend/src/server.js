@@ -21,9 +21,7 @@ app.use(cors({
 }))
 
 app.use("/api/inngest",serve({client:inngest,functions}))
-app.get("/books" ,(req , res)=>{
-    res.status(200).json({msg: "this is books  from api"})
-})
+
 
 app.get("/test" ,(req , res)=>{
     res.status(200).json({msg: "this is test  from api"})
