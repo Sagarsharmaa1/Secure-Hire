@@ -17,6 +17,7 @@
     "express": "^5.1.0",
     "inngest": "^3.49.3",
     "mongoose": "^9.1.4",
-    "secure-hire": "file:.."
+    "secure-hire": "file:..",
+    "stream-chat": "^9.30.1"
   }
 }
