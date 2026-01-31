@@ -1,14 +1,14 @@
 import express from "express"
 import path from "path"
-
 import { ENV } from "./lib/env.js";
 import { connect } from "http2";
 import { connectDB } from "./lib/db.js";
 import cors from 'cors';
-
 import {serve} from "inngest/express"
-
+import { clerkMiddleware } from '@clerk/express'
 import { inngest, functions } from "./lib/inngest.js"; 
+
+import chatRoutes from "./routes/chatRoutes.js"
 const app = express();
 
 const __dirname = path.resolve()
@@ -20,14 +20,13 @@ app.use(cors({
     origin:ENV.CLINT_URL , credentials:true
 }))
 
+app.use(clerkMiddleware()) //this will adds auth field to request object: req.auth() 
 app.use("/api/inngest",serve({client:inngest,functions}))
+app.use("/api/chat",chatRoutes);
 
-
-app.get("/test" ,(req , res)=>{
-    res.status(200).json({msg: "this is test  from api"})
-})
 
 app.get("/health" ,(req , res)=>{
+  
     res.status(200).json({msg: "this is health details from api"})
 })
 
@@ -41,7 +40,6 @@ if(ENV.NODE_ENV === "production"){
 }
 
 //server starting 
-
 const startServer = async()=>{
 try {
     await connectDB();
